@@ -1,6 +1,6 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
-import {setIsSidebarCollapsed } from "@/state";
+import { setIsSidebarCollapsed } from "@/state";
 import {
   Archive,
   CircleDollarSign,
@@ -11,6 +11,7 @@ import {
   SlidersHorizontal,
   User,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -34,17 +35,14 @@ const SidebarLink = ({
   return (
     <Link href={href}>
       <div
-        className={`cursor-pointer flex items-center ${
-          isCollapsed ? "justify-center py-4" : "justify-start px-8 py-4"
-        } hover:text-blue-500 hover:bg-blue-100 gap-3 transition-colors ${
-          isActive ? "bg-blue-200 text-white" : ""
-        }`}
+        className={`cursor-pointer flex items-center ${isCollapsed ? "justify-center py-4" : "justify-start px-8 py-4"
+          } hover:text-blue-500 hover:bg-blue-100 gap-3 transition-colors ${isActive ? "bg-blue-200 text-white" : ""
+          }`}
       >
         <Icon className="w-6 h-6 !text-gray-700" />
         <span
-          className={`${
-            isCollapsed ? "hidden" : "block"
-          } font-medium text-gray-700`}
+          className={`${isCollapsed ? "hidden" : "block"
+            } font-medium text-gray-700`}
         >
           {label}
         </span>
@@ -58,28 +56,31 @@ const Sidebar = () => {
   const isSideBarCollapsed = useAppSelector(
     (state) => state.global.isSideBarCollapsed
   );
-  
+
   const toggleSidebar = () => {
     dispatch(setIsSidebarCollapsed(!isSideBarCollapsed));
   };
 
 
-  const sidebarClassNames = `fixed flex flex-col ${
-    isSideBarCollapsed ? "w-0 md:w-16" : "w-72 md:w-74"
-  } bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40`;
+  const sidebarClassNames = `fixed flex flex-col ${isSideBarCollapsed ? "w-0 md:w-16" : "w-72 md:w-74"
+    } bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40`;
   return (
     <div className={sidebarClassNames}>
       {/* TOP LOGO */}
       <div
-        className={`flex gap-3 justify-between md:justify-normal items-center pt-8 ${
-          isSideBarCollapsed ? "px-5" : "px-8"
-        }`}
+        className={`flex gap-3 justify-between md:justify-normal items-center pt-8 ${isSideBarCollapsed ? "px-5" : "px-8"
+          }`}
       >
-        <div>Logo</div>
+        <Image
+          src="https://s3-inventorymanagement-images.s3.us-east-1.amazonaws.com/logo.png"
+          alt="Logo"
+          width={27}
+          height={27}
+          className="rounded w-8"
+        />
         <h1
-          className={`${
-            isSideBarCollapsed ? "hidden" : "block"
-          }font-extrabold text-2xl`}
+          className={`${isSideBarCollapsed ? "hidden" : "block"
+            }font-extrabold text-2xl`}
         >
           TEGSTOCK
         </h1>
